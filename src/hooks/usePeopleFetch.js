@@ -1,21 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-var selectedCountries = [];
-
 export const usePeopleFetch = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
-
-  const handleSelectedCountries = (country) => {
-    addCountry(country);
-    fetchUsers();
-  };
+  }, [selectedCountries]);
 
   /**
    * The function checks if the selected country is in the array.
@@ -24,16 +18,20 @@ export const usePeopleFetch = () => {
    * If yes removes it
    *
    * @param country gets the country code as a parameter
+   * (exm: "CA" for Canada or "DE" for Germania)
    */
-
-  function addCountry(country) {
-    const countryIndex = selectedCountries.indexOf(country);
-    if (countryIndex >= 0) {
-      selectedCountries.splice(countryIndex, 1);
-    } else {
-      selectedCountries.push(country);
-    }
-  }
+  const handleSelectedCountries = (country) => {
+    setSelectedCountries(() => {
+      const temp = [...selectedCountries];
+      const countryIndex = temp.indexOf(country);
+      if (countryIndex >= 0) {
+        temp.splice(countryIndex, 1);
+      } else {
+        temp.push(country);
+      }
+      return temp;
+    });
+  };
 
   async function fetchUsers() {
     setIsLoading(true);

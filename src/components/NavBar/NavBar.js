@@ -20,7 +20,14 @@ const NavBar = () => {
         textColor="primary"
       >
         <Tab label="Home" index={0} />
-        <Tab label="Favorites" index={1} />
+        <Tab
+          label="Favorites"
+          index={1}
+          onClick={() => {
+            console.log("ENTERED");
+            render("/favorites");
+          }}
+        />
       </Tabs>
     </AppBar>
   );
