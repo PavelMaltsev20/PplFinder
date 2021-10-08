@@ -21,15 +21,15 @@ export const usePeopleFetch = () => {
    * (exm: "CA" for Canada or "DE" for Germania)
    */
   const handleSelectedCountries = (country) => {
-    setSelectedCountries(() => {
-      const temp = [...selectedCountries];
-      const countryIndex = temp.indexOf(country);
+    setSelectedCountries((prevState) => {
+      const newArray = [...prevState];
+      const countryIndex = newArray.indexOf(country);
       if (countryIndex >= 0) {
-        temp.splice(countryIndex, 1);
+        newArray.splice(countryIndex, 1);
       } else {
-        temp.push(country);
+        newArray.push(country);
       }
-      return temp;
+      return newArray;
     });
   };
 
