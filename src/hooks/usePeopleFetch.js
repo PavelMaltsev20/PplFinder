@@ -9,7 +9,7 @@ export const usePeopleFetch = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [selectedCountries]);
+  }, [selectedCountries, pageNumber]);
 
   /**
    * The function checks if the selected country is in the array.
@@ -20,7 +20,7 @@ export const usePeopleFetch = () => {
    * @param country gets the country code as a parameter
    * (e.g.: "CA" for Canada or "DE" for Germania)
    */
-  const handleSelectedCountries = (country) => {
+  const handlerSelectedCountries = (country) => {
     setSelectedCountries((prevState) => {
       const newArray = [...prevState];
       const countryIndex = newArray.indexOf(country);
@@ -33,14 +33,26 @@ export const usePeopleFetch = () => {
     });
   };
 
+  const handlerNextPage = () => {
+    console.log("Method called");
+    setPageNumber((prev) => {
+      return prev + 1;
+    });
+  };
+
   async function fetchUsers() {
     setIsLoading(true);
     const response = await axios.get(
       `https://randomuser.me/api/?results=25&page=${pageNumber}&nat=${selectedCountries}`
     );
     setIsLoading(false);
-    setUsers(response.data.results);
+    setUsers((prev) => {
+      const users = [];
+      users.push(...prev);
+      users.push(...response.data.results);
+      return users;
+    });
   }
 
-  return { users, isLoading, handleSelectedCountries, fetchUsers };
+  return { users, isLoading, handlerSelectedCountries, handlerNextPage, fetchUsers };
 };
