@@ -1,4 +1,5 @@
 import CheckBox from "components/CheckBox";
+import React from "react";
 
 const CountriesList = ({ handle }) => {
   /**
