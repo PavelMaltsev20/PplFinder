@@ -8,7 +8,11 @@ import * as S from "./style";
 import CountriesList from "components/CountriesList";
 import { FavoritesContext } from "context";
 
-const UserList = ({ users, isLoading, handleSelectedCountries }) => {
+const UserList = ({
+  users,
+  isLoading,
+  handlerSelectedCountries,
+}) => {
   const [hoveredUserId, setHoveredUserId] = useState();
   const ctx = useContext(FavoritesContext);
 
@@ -39,8 +43,7 @@ const UserList = ({ users, isLoading, handleSelectedCountries }) => {
   const checkFavorite = (user) => {
     const favoritesList = ctx.fetchFavorites();
     for (const item of favoritesList) {
-      console.log(user);
-      if (item.email === user.email && item.cell === user.cell) {
+      if (item.login.uuid === user.login.uuid) {
         return true;
       }
     }
@@ -51,7 +54,9 @@ const UserList = ({ users, isLoading, handleSelectedCountries }) => {
   return (
     <S.UserList>
       <S.Filters>
-        <CountriesList handle={handleSelectedCountries} />
+        {handlerSelectedCountries !== null && (
+          <CountriesList handle={handlerSelectedCountries} />
+        )}
       </S.Filters>
       <S.List>
         {users.map((user, index) => {
@@ -81,7 +86,7 @@ const UserList = ({ users, isLoading, handleSelectedCountries }) => {
                   <FavoriteIcon
                     color="error"
                     onClick={() => {
-                      ctx.updateFavorites(user.email, user.cell);
+                      ctx.updateFavorites(user);
                     }}
                   />
                 </IconButton>

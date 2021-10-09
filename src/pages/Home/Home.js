@@ -18,7 +18,7 @@ const Home = () => {
         <UserList
           users={users}
           isLoading={isLoading}
-          handleSelectedCountries={handleSelectedCountries}
+          handlerSelectedCountries={handleSelectedCountries}
         />
       </S.Content>
     </S.Home>

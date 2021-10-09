@@ -18,7 +18,7 @@ export const usePeopleFetch = () => {
    * If yes removes it
    *
    * @param country gets the country code as a parameter
-   * (exm: "CA" for Canada or "DE" for Germania)
+   * (e.g.: "CA" for Canada or "DE" for Germania)
    */
   const handleSelectedCountries = (country) => {
     setSelectedCountries((prevState) => {
