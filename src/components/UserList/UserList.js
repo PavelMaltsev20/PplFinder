@@ -8,11 +8,7 @@ import * as S from "./style";
 import CountriesList from "components/CountriesList";
 import { FavoritesContext } from "context";
 
-const UserList = ({
-  users,
-  isLoading,
-  handlerSelectedCountries,
-}) => {
+const UserList = ({ users, isLoading, handlerSelectedCountries, updateFavorites }) => {
   const [hoveredUserId, setHoveredUserId] = useState();
   const ctx = useContext(FavoritesContext);
 
@@ -87,6 +83,9 @@ const UserList = ({
                     color="error"
                     onClick={() => {
                       ctx.updateFavorites(user);
+                      if (updateFavorites !== null) {
+                        updateFavorites();
+                      }
                     }}
                   />
                 </IconButton>

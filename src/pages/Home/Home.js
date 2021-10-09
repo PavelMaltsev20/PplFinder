@@ -19,6 +19,7 @@ const Home = () => {
           users={users}
           isLoading={isLoading}
           handlerSelectedCountries={handleSelectedCountries}
+          updateFavorites={null}
         />
       </S.Content>
     </S.Home>

@@ -35,6 +35,7 @@ const Favorites = () => {
           users={favoritesList}
           isLoading={isLoading}
           handlerSelectedCountries={null}
+          updateFavorites={fetchFavorites}
         />
       </S.Content>
     </S.Home>
