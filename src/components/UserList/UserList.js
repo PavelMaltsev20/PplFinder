@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Text from "components/Text";
 import Spinner from "components/Spinner";
 import IconButton from "@material-ui/core/IconButton";
@@ -6,9 +6,11 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import * as S from "./style";
 
 import CountriesList from "components/CountriesList";
+import { FavoritesContext } from "context";
 
 const UserList = ({ users, isLoading, handleSelectedCountries }) => {
   const [hoveredUserId, setHoveredUserId] = useState();
+  const ctx = useContext(FavoritesContext);
 
   const handleMouseEnter = (index) => {
     setHoveredUserId(index);
@@ -16,6 +18,34 @@ const UserList = ({ users, isLoading, handleSelectedCountries }) => {
 
   const handleMouseLeave = () => {
     setHoveredUserId();
+  };
+
+  /**
+   * Function checks if this user is favorite.
+   *
+   * This function is very bad for performance.
+   * Since we cannot make changes on the server,
+   * we have to use this function.
+   *
+   *
+   * If we could change the value on the server,
+   * we would have a favorite variable of the user.
+   * We would just get its value and set our favorite icon.
+   *
+   *
+   * @param user it's value help us check if user is favorite
+   * @returns boolean
+   */
+  const checkFavorite = (user) => {
+    const favoritesList = ctx.fetchFavorites();
+    for (const item of favoritesList) {
+      console.log(user);
+      if (item.email === user.email && item.cell === user.cell) {
+        return true;
+      }
+    }
+
+    return false;
   };
 
   return (
@@ -44,9 +74,16 @@ const UserList = ({ users, isLoading, handleSelectedCountries }) => {
                   {user?.location.city} {user?.location.country}
                 </Text>
               </S.UserInfo>
-              <S.IconButtonWrapper isVisible={index === hoveredUserId}>
+              <S.IconButtonWrapper
+                isVisible={index === hoveredUserId || checkFavorite(user)}
+              >
                 <IconButton>
-                  <FavoriteIcon color="error" />
+                  <FavoriteIcon
+                    color="error"
+                    onClick={() => {
+                      ctx.updateFavorites(user.email, user.cell);
+                    }}
+                  />
                 </IconButton>
               </S.IconButtonWrapper>
             </S.User>

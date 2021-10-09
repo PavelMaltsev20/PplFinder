@@ -1,0 +1,1 @@
+export { FavoritesContext } from "./FavoritesContext";
