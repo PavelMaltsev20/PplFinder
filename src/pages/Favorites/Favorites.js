@@ -1,7 +1,7 @@
 import Text from "components/Text";
 import UserList from "components/UserList";
 import { usePeopleFetch } from "hooks";
-import * as S from "./style";
+import * as S from "../style";
 
 import React, { useContext, useState, useEffect } from "react";
 import { FavoritesContext } from "context";
