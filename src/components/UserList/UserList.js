@@ -7,8 +7,15 @@ import * as S from "./style";
 
 import CountriesList from "components/CountriesList";
 import { FavoritesContext } from "context";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const UserList = ({ users, isLoading, handlerSelectedCountries, updateFavorites }) => {
+const UserList = ({
+  users,
+  isLoading,
+  handlerSelectedCountries,
+  updateFavorites,
+  handlerNextPage,
+}) => {
   const [hoveredUserId, setHoveredUserId] = useState();
   const ctx = useContext(FavoritesContext);
 

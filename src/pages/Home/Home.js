@@ -48,10 +48,10 @@ const Home = () => {
                 isLoading={isLoading}
                 handlerSelectedCountries={handlerSelectedCountries}
                 updateFavorites={null}
+                handlerNextPage={handlerNextPage}
               />
             }
           </InfiniteScroll>
-        
         </S.Header>
       </S.Content>
     </S.Home>
