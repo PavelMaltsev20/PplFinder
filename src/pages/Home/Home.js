@@ -36,6 +36,9 @@ const Home = () => {
               <b>Yay! You have seen it all</b>
             </p>
           }
+          /**
+          Additional feature you can drag from top to bottom to refresh the list
+           */
           refreshFunction={handlerSelectedCountries}
           pullDownToRefresh
           pullDownToRefreshThreshold={50}

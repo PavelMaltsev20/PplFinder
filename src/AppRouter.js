@@ -4,19 +4,18 @@ import { Home } from "pages";
 import { Favorites } from "pages";
 import { ThemeProvider } from "theme";
 import NavBar from "components/NavBar";
-import { FavoritesContext } from "context";
 
 const AppRouter = () => {
   return (
-      <ThemeProvider>
-        <Router>
-          <NavBar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/favorites" component={Favorites} />
-          </Switch>
-        </Router>
-      </ThemeProvider>
+    <ThemeProvider>
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/favorites" component={Favorites} />
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 };
 
