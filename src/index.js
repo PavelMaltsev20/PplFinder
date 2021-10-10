@@ -7,5 +7,5 @@ ReactDOM.render(
   <BrowserRouter>
     <AppRouter />
   </BrowserRouter>,
-  document.getElementById("root")
+  document.querySelector("#root")
 );
