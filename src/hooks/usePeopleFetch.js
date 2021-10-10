@@ -8,21 +8,18 @@ export const usePeopleFetch = () => {
   const [selectedCountries, setSelectedCountries] = useState([]);
 
   useEffect(() => {
-    console.log("called");
-    fetchByCounties();
-  }, [selectedCountries]);
-
-  useEffect(() => {
-    console.log("calle 2");
-
     fetchUsers();
   }, [pageNumber]);
+
+  useEffect(() => {
+    fetchUsersByCountry();
+  }, [selectedCountries]);
 
   /**
    * The function checks if the selected country is in the array.
    *
-   * If not adds it to array.
    * If yes removes it
+   * If not adds it to array.
    *
    * @param country gets the country code as a parameter
    * (e.g.: "CA" for Canada or "DE" for Germania)
@@ -46,32 +43,32 @@ export const usePeopleFetch = () => {
     });
   };
 
-  async function fetchByCounties() {
-    setIsLoading(true);
-    const response = await axios.get(
-      `https://randomuser.me/api/?results=25&page=${pageNumber}&nat=${selectedCountries}`
-    );
-    setIsLoading(false);
-    setUsers(() => {
-      const users = [];
-      users.push(...response.data.results);
-      return users;
-    });
-  }
+  const response = axios.get(
+    `https://randomuser.me/api/?results=25&page=${pageNumber}&nat=${selectedCountries}`
+  );
 
   async function fetchUsers() {
     setIsLoading(true);
-    const response = await axios.get(
-      `https://randomuser.me/api/?results=25&page=${pageNumber}&nat=${selectedCountries}`
-    );
+    const users = await response;
     setIsLoading(false);
     setUsers((prev) => {
-      const users = [];
-      users.push(...prev);
-      users.push(...response.data.results);
-      return users;
+      const list = [];
+      list.push(...prev);
+      list.push(...users.data.results);
+      return list;
     });
   }
 
-  return { users, isLoading, handlerSelectedCountries, handlerNextPage, fetchUsers };
+  async function fetchUsersByCountry() {
+    setIsLoading(true);
+    const users = await response;
+    setIsLoading(false);
+    setUsers(() => {
+      const list = [];
+      list.push(...users.data.results);
+      return list;
+    });
+  }
+
+  return { users, isLoading, handlerSelectedCountries, handlerNextPage };
 };
