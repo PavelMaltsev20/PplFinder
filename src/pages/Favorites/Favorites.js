@@ -1,7 +1,6 @@
 import Text from "components/Text";
-import UserList from "components/UserList";
-import { usePeopleFetch } from "hooks";
 import * as S from "../style";
+import User from "../../components/User"
 
 import React, { useContext, useState, useEffect } from "react";
 import { FavoritesContext } from "context";
@@ -9,19 +8,16 @@ import { FavoritesContext } from "context";
 const Favorites = () => {
   const ctx = useContext(FavoritesContext);
   const [favoritesList, setFavoritesList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
+ 
   useEffect(() => {
     fetchFavorites();
   }, []);
 
   const fetchFavorites = () => {
-    setIsLoading(true);
-    setFavoritesList(() => {
+     setFavoritesList(() => {
       return ctx.fetchFavorites();
     });
-    setIsLoading(false);
-  };
+   };
 
   return (
     <S.Home>
@@ -31,12 +27,9 @@ const Favorites = () => {
             Favorites
           </Text>
         </S.Header>
-        <UserList
-          users={favoritesList}
-          isLoading={isLoading}
-          handlerSelectedCountries={null}
-          updateFavorites={fetchFavorites}
-        />
+        {favoritesList.map((user, index) => {
+          return <User user={user} index={index}  fetchFavorites={fetchFavorites}/>;
+        })}
       </S.Content>
     </S.Home>
   );

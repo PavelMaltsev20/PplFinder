@@ -47,7 +47,7 @@ const Home = () => {
           }
         >
           {users.map((user, index) => {
-            return <User user={user} index={index} />;
+            return <User user={user} index={index} fetchFavorites={null} />;
           })}
         </InfiniteScroll>
         {isLoading && (

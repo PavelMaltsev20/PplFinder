@@ -5,7 +5,7 @@ import * as S from "./style";
 import Text from "../Text";
 import { FavoritesContext } from "context";
 
-const User = ({ user, index }) => {
+const User = ({ user, index, fetchFavorites }) => {
   const [hoveredUserId, setHoveredUserId] = useState();
   const ctx = useContext(FavoritesContext);
 
@@ -70,6 +70,9 @@ const User = ({ user, index }) => {
               color="error"
               onClick={() => {
                 ctx.updateFavorites(user);
+                if (fetchFavorites !== null) {
+                  fetchFavorites();
+                }
               }}
             />
           </IconButton>
