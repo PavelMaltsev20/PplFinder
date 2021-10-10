@@ -28,3 +28,8 @@ export const Form = styled.div`
   max-width: 400px;
   width: 100%;
 `;
+
+export const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;

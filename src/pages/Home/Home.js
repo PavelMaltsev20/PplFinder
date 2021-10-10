@@ -4,6 +4,7 @@ import UserList from "components/UserList";
 import { usePeopleFetch } from "hooks";
 import * as S from "../style";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Spinner from "../../components/Spinner";
 
 import User from "../../components/User";
 
@@ -45,11 +46,10 @@ const Home = () => {
             }
           >
             {
-              
-                users.map((user, index) => {
-                  return <User user={user} index={index} />;
-                }) 
-          
+              users.map((user, index) => {
+                return <User user={user} index={index} />;
+              })
+
               /* <UserList
                 users={users}
                 isLoading={isLoading}
@@ -60,6 +60,11 @@ const Home = () => {
             }
           </InfiniteScroll>
         </S.Header>
+        {isLoading && (
+          <S.SpinnerWrapper>
+            <Spinner color="primary" size="45px" thickness={6} variant="indeterminate" />
+          </S.SpinnerWrapper>
+        )}
       </S.Content>
     </S.Home>
   );

@@ -34,10 +34,7 @@ export const UserPicture = styled.img`
   border-radius: 45%;
 `;
 
-export const SpinnerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+
 
 export const IconButtonWrapper = styled.div`
   display: flex;
