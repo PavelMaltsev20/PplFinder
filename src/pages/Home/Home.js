@@ -5,6 +5,8 @@ import { usePeopleFetch } from "hooks";
 import * as S from "../style";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import User from "../../components/User";
+
 const Home = () => {
   const {
     users,
@@ -43,13 +45,18 @@ const Home = () => {
             }
           >
             {
-              <UserList
+              
+                users.map((user, index) => {
+                  return <User user={user} index={index} />;
+                }) 
+          
+              /* <UserList
                 users={users}
                 isLoading={isLoading}
                 handlerSelectedCountries={handlerSelectedCountries}
                 updateFavorites={null}
                 handlerNextPage={handlerNextPage}
-              />
+              /> */
             }
           </InfiniteScroll>
         </S.Header>
