@@ -34,8 +34,6 @@ export const UserPicture = styled.img`
   border-radius: 45%;
 `;
 
-
-
 export const IconButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;

@@ -27,10 +27,10 @@ const User = ({ user, index }) => {
    *
    * If we could change the value on the server,
    * we would have a favorite variable of the user.
-   * We would just get its value and set our favorite icon.
+   * We would just gets its value and set our favorite icon.
    *
    *
-   * @param user it's value help us check if user is favorite
+   * @param user help us check if user is favorite
    * @returns boolean
    */
   const checkFavorite = (user) => {
@@ -70,9 +70,6 @@ const User = ({ user, index }) => {
               color="error"
               onClick={() => {
                 ctx.updateFavorites(user);
-                if (updateFavorites !== null) {
-                  updateFavorites();
-                }
               }}
             />
           </IconButton>
