@@ -20,7 +20,7 @@ const NavBar = () => {
         indicatorColor="primary"
         textColor="primary"
       >
-        <Tab label="Home" index={0} href="/#" />
+        <Tab label="Home" index={0} href="/PplFinder/#" />
         <Tab label="Favorites" index={1} href="/PplFinder/#/favorites" />
       </Tabs>
     </AppBar>
